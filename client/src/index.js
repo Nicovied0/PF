@@ -22,7 +22,7 @@ root.render(
     <Auth0Provider
         domain="dev-i2ktot5tu17k7x45.us.auth0.com"
         clientId="a5EV2B0kWxPioUIHkQUJIkc9yTnZPnuX"
-        redirectUri={window.location.origin}
+        redirectUri={"https://el-campito-refugio.vercel.app"}
       >
         <App />
       </Auth0Provider>

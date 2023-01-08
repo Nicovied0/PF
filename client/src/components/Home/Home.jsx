@@ -1,19 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";
+import BarraDeNavegacion from "../BarraDeNavegacion/BarraDeNavegacion";
 import homeimg from "../../assets/img/homeimg.jpg";
 import styles from "./Home.module.css";
 import Footer from "../Footer/Footer";
 import { useAuth0 } from "@auth0/auth0-react";
-import Modal from "../Modal/Modal";
+import ModalLogin from "../ModalLogin/ModalLogin";
+import ModalRegister from "../ModalRegister/ModalRegister";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsersEmail } from "../../redux/actions/action";
 
 const Home = () => {
   const { user } = useAuth0();
+  const dispatch = useDispatch();
+  const [userGoogle, setUserGoogle] = useState();
+  const usersEmail = useSelector((state) => state.userEmail);
+  const [data, setData] = useState(null);
+  const localStore = JSON.parse(localStorage.getItem("user"));
+  //   console.log(usersEmails)
+
+  useEffect(() => {
+    dispatch(getUsersEmail());
+    // return () => {
+    setUserGoogle(user?.email);
+
+    if (userGoogle) {
+      let info = usersEmail.includes(userGoogle);
+      // console.log(datass);
+      setData(info);
+      return info;
+    }
+    // };
+  }, []);
+
+  let aux = null;
+  const aca = () => {
+    if (user) {
+      return usersEmail.includes(user.email);
+    }
+  };
+
+  let fun = aca();
+  console.log(fun, "estado");
+  console.log(aux, "estadodata");
+
+  //   console.log(userGoogle)
+  //   if (userGoogle) {
+  //     let datass = usersEmail.includes(userGoogle);
+  //     console.log(datass);
+  //     // setData(datass);
+  //   }
+  //   console.log(data);
+  //     console.log(user.email,"soy local USER OME")
+  //     let userType = emailAvailable(user.email)
+  //     console.log(userType)
+  // }
+  // console.log(userGoogle,"soy el estado")
+  // useEffect( () =>{
+  //     let data =  serUserGoogle(userType)
+
+  // })
+  console.log(localStore)
+
   return (
     <div className={styles.container}>
-      {console.log(user)}
-      {user ? <Modal /> : <></>}
-      <NavBar />
+      {user && !localStore && fun === false ? <ModalRegister /> : <></>}
+      {user && !localStore && fun === true ? <ModalLogin /> : <></>}
+      <BarraDeNavegacion />
       <main className={styles.home}>
         <section>
           <article className={styles.articleHome}>

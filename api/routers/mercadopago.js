@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const mercadopago = require("mercadopago");
+const dotenv = require("dotenv");
+dotenv.config();
 
 router.post("/", async (req, res) => {
   const { title, unit_price } = req.body;
@@ -14,7 +16,7 @@ router.post("/", async (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/colaborar", //falta hacer esto
+      success: `${process.env.BACK_URL}/colaborar`, //falta hacer esto
       failure: "",
       pending: "",
     },
@@ -42,4 +44,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+
 module.exports = router;
+

@@ -16,6 +16,10 @@ const Adopcion = (props) => {
     phone: "undefined",
     birthday: "undefined",
   });
+
+  // React.useEffect(()=>{
+  // },[user]);
+
   console.log(storage);
 
   const {

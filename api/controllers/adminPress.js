@@ -73,47 +73,92 @@ const adminUpdatePress = async (req, res) => {
 
 const adminCreatePress = async (req, res) => {
   try {
-    const { body } = req;
+    const { date, media, link, type } = req.body;
+  
+    let previewData = {}; 
 
-    const previewData = {};
-
-    if (body.link) {
-      previewData = await linkPreviewGenerator(body.link) || {};
+    if (link) {
+      previewData = await linkPreviewGenerator(link) ;
     }
 
-    previewData.date = body.date;
-    previewData.media = body.media;
-    previewData.link = body.link;
-    previewData.type = body.type;
-    console.log(previewData);
 
-    const press = await pressModel.create(previewData);
+
+    // console.log({
+    //   date,
+    //   media,
+    //   link,
+    //   ...previewData
+    // })
+
+    // console.log(typeof previewData);
+
+    const press = await pressModel.create({
+      date,
+      media,
+      link,
+      type,
+      ...previewData
+    });
 
     res.status(200).send({ data: press });
-
     
   } catch (e) {
     res.send({ error: e });
   }
 };
 
+// const adminDeletePress = async (req, res) => {
+//   try {
+//     const id = req.params.id;
+
+//     const pressDelete = await pressModel.findByIdAndUpdate(
+//       { _id: id },
+//       { isDelete: true },
+//       {
+//         returnOriginal: false,
+//       }
+//     );
+
+//     res.status(201).send(pressDelete);
+//   } catch (e) {
+//     res.status(404).send({ error: e });
+//   }
+// };
+
 const adminDeletePress = async (req, res) => {
   try {
-    const id = req.params.id;
 
-    const pressDelete = await pressModel.findByIdAndUpdate(
-      { _id: id },
-      { isDelete: true },
-      {
-        returnOriginal: false,
+    const id = req.params.id; 
+    const { query: { filter} } = req; 
+
+    if (!filter) {
+      let pressDelete = await pressModel.findByIdAndUpdate({ _id: id }, { isDelete: true },
+        {
+          returnOriginal: false,
+        });
+
+      res.status(201).send(pressDelete);
+
+    } else {
+
+      let { id } = JSON.parse(filter); 
+      let listDeletePress = []; 
+
+      for(let press of id){
+        let presssDelete = await pressModel.findByIdAndUpdate({ _id: press }, { isDelete: true },
+          {
+            returnOriginal: false,
+          });
+        listDeletePress.push(presssDelete)
       }
-    );
 
-    res.status(201).send(pressDelete);
+      res.status(200).send(listDeletePress)
+    }
   } catch (e) {
     res.status(404).send({ error: e });
   }
 };
+
 
 module.exports = {
   adminPress,

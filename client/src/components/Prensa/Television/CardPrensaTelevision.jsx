@@ -5,10 +5,11 @@ import { FcCamcorderPro } from "react-icons/fc";
 const CardPrensaTelevision = ({ link, logo, media, title, description }) => {
   return (
     <div className={styles.cardSize}>
-      <iframe title="logo" src={link}>
+      <iframe title="cardPrensa" src={link}>
+        {" "}
       </iframe>
       <div className={styles.prensaTeleContenedor}>
-        <img src={logo} alt="logo" className={styles.imgLogoTele} />
+        <img alt="logoprensa" src={logo} className={styles.imgLogoTele} />
         <p className={styles.pCardPress}>
           <FcCamcorderPro />
           {media}

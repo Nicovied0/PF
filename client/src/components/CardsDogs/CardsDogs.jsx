@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import style from "./CardsDogs.module.css";
 import Loading from "../Loading/Loading";
 import Filters from "../Filters/Filters";
-import Navbar from "../NavBar/NavBar";
+import BarraDeNavegacion from "../BarraDeNavegacion/BarraDeNavegacion";
 import Footer from "../Footer/Footer";
 
  const CardsDogs = () => {
@@ -22,7 +22,6 @@ import Footer from "../Footer/Footer";
   let currentPageItems = allDogs?.slice(firsItemPerPage, lastItemPerPage);
 
   function pagination(page) {
-    // console.log(page - 1, "soy page ");
     setCurrentPage(page);
   }
 
@@ -52,7 +51,7 @@ import Footer from "../Footer/Footer";
     return <Loading />;
   } else {
     return (
-      <div><Navbar/>
+      <div><BarraDeNavegacion/>
       <div className={style.divContainer}>
       
         <h2 className={style.h2}>Conocenos Nuestros Perritos</h2>

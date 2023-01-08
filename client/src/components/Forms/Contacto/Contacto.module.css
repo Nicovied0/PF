@@ -3,33 +3,35 @@
     margin: 0px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+   
+}
+.mainContainer{
+    width: 30vw; 
+   
 }
 
-.mainContainer {
-    width: 30vw;
-}
-
-.form {
+.form{
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
 }
 
-.item {
-    display: flex;
+.item{
+    display:flex;
     flex-direction: column;
     gap: 10px;
 }
 
 .label {
-
+    
     font-family: 'Seravek', 'sans-serif';
     font-size: 1em;
     color: #444445;
     font-weight: 300;
 }
 
-.input {
+.input{
     background: #f2f2f2;
     border: 1px solid #888;
     border-radius: 8px;
@@ -37,7 +39,7 @@
     padding: 10px;
 }
 
-.inputAsunto {
+.inputAsunto{
     height: 100px;
     background: #f2f2f2;
     border: 1px solid #888;
@@ -46,7 +48,7 @@
     padding: 10px;
 }
 
-.submit {
+.submit{
     width: 100px;
     background-color: #E48125;
     border: 1px solid transparent;
@@ -57,7 +59,7 @@
     cursor: pointer;
 }
 
-.submit:hover {
+.submit:hover{
     background-color: orange;
     transform: scale(1.05);
 }

@@ -13,6 +13,7 @@ import {
   FILTER_DOGS_BY_SIZE,
   GET_PRESS,
   POST_MELI,
+  GET_USERS_EMAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +24,7 @@ const initialState = {
   allDogs: [],
   press: [],
   responseCloudinary: "",
+  userEmail: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -42,10 +44,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         detailsDogs: action.payload,
-      };
-    case POST_MELI:
-      return {
-        ...state,
       };
     case CLEAR_DETAILS:
       return {
@@ -67,6 +65,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         dog: action.payload,
       };
+    case POST_MELI:
+      return {
+        ...state,
+      };
     case GET_CLOUDINARY_RESPONSE:
       const link = action.payload;
       return {
@@ -79,6 +81,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         responseCloudinary: "",
       };
+
     case FILTER_DOGS_BY_GENDER:
       const filtredByGender = state.allDogs;
       const dogsFiltered =
@@ -139,6 +142,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         press: action.payload,
       };
+    case GET_USERS_EMAIL:
+      return {
+        ...state,
+        userEmail: action.payload,
+      };
+
     default:
       return {
         ...state,

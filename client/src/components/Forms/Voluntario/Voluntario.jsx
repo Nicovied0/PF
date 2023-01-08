@@ -16,6 +16,9 @@ const Voluntario = (props) => {
     birthday: "undefined",
   });
 
+  // React.useEffect(()=>{
+  // },[user]);
+
   console.log(storage);
 
   const {

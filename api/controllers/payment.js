@@ -1,15 +1,20 @@
 const axios = require("axios");
-const dotenv = require("dotenv");
-dotenv.config();
 const {
   PAYPAL_API,
-  PORT,
   HOST,
   PAYPAL_API_CLIENT,
   PAYPAL_API_SECRET,
 } = require("../config/paypal");
 
+const { adminCreateContrib } = require("./adminContrib");
+
+let pago = 0;
 const createOrder = async (req, res) => {
+  const monto = req.body;
+  // console.log(a,"soy a ")
+  pago = monto.monto; // pago es la variable que obtiene el valor que entra por body
+  console.log(monto.monto, "soy monto payment");
+
   try {
     const order = {
       intent: "CAPTURE",
@@ -17,32 +22,32 @@ const createOrder = async (req, res) => {
         {
           amount: {
             currency_code: "USD",
-            value: "50",
+            value: pago,
           },
         },
       ],
       application_context: {
-        brand_name: 'El Campito Refugio',
-        landing_page: 'NO_PREFERENCE',
-        user_action: 'PAY_NOW',
-        return_url: `${HOST}/capture-order`,
-        cancel_url: "http://localhost:3000/",
+        brand_name: "mycompany.com",
+        landing_page: "NO_PREFERENCE",
+        user_action: "PAY_NOW",
+        return_url: "http://localhost:3001/api/paypal/capture-order",
+        cancel_url: "http://localhost:3001/api/paypal/cancel-order",
       },
     };
 
     // format the body
     const params = new URLSearchParams();
-    params.append('grant_type', 'client_credentials');
+    params.append("grant_type", "client_credentials");
 
     // Generate an access token
     const {
       data: { access_token },
     } = await axios.post(
-      'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+      "https://api-m.sandbox.paypal.com/v1/oauth2/token",
       params,
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         auth: {
           username: PAYPAL_API_CLIENT,
@@ -51,7 +56,7 @@ const createOrder = async (req, res) => {
       }
     );
 
-    console.log(access_token);
+    // console.log(access_token);
 
     // make a request
     const response = await axios.post(
@@ -63,16 +68,19 @@ const createOrder = async (req, res) => {
         },
       }
     );
-    // console.log(response, "soy response");
-    console.log(response.data, "soy response 1");
+
+    console.log(response.data);
+    console.log("soy data");
+
     return res.json(response.data);
   } catch (error) {
     console.log(error.message);
-    return res.status(500).json("Something goes wrong");
+    return res.status(500).json("Something goes wrong crate");
   }
 };
 
 const captureOrder = async (req, res) => {
+  console.log("entre a cpture order");
   const { token } = req.query;
 
   try {
@@ -87,22 +95,36 @@ const captureOrder = async (req, res) => {
       }
     );
 
-    console.log(response.data, "soy data");
+    console.log(response.data);
+    let info = response.data;
+    let obj = {
+      detail: "Este pago fue realizado correctamente",
+      name: info.payer.name.given_name + " " + info.payer.name.surname,
+      email: info.payer.email_address,
+      total: pago, // pago es el valor que ingresa desde body
+      method: "paypal",
+    };
+    console.log(obj, "soy obj");
 
-    res.redirect(PORT);
+    // adminCreateContrib(obj)
+
+    // res.json(response.data)
+    //respuesta de la data en json
+    res.redirect("http://localhost:3000/pay");
+    //respuesta con redirect
   } catch (error) {
     console.log(error.message);
-    return res.status(500).json({ message: "Internal Server error" });
+    res.status(500).json({ message: "Internal Server error caputure" });
   }
 };
 
 const cancelPayment = (req, res) => {
-  res.redirect("/");
+  console.log("Se cancelo la operacion");
+  res.redirect("http://localhost:3000");
 };
 
 module.exports = {
-  createOrder,
   captureOrder,
-  cancelPayment
-
+  cancelPayment,
+  createOrder,
 };

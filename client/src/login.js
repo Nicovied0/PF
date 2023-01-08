@@ -135,6 +135,7 @@ export function payWithPayPal(monto) {
   };
 }
 
+
 // export function captureData() {
 //   return async function (req, res) {
 //     let { token } = await req.query;

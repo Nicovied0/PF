@@ -13,7 +13,7 @@ dotenv.config();
 
 //para que funcione  hacer npm intall dotenv
 
-axios.defaults.baseURL = process.env.REACT_APP_API || `${BACK_CONECT}`;
+axios.defaults.baseURL = process.env.REACT_APP_API || "https://campito-api-production.up.railway.app";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

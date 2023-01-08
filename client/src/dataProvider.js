@@ -5,7 +5,7 @@ import pushCloudinary from "./hooks/pushCloudinary";
 const dotenv = require("dotenv");
 dotenv.config();
 
-const apiUrl = `${BACK_CONECT}`;
+const apiUrl = "https://campito-api-production.up.railway.app";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {

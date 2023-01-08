@@ -110,7 +110,7 @@ const captureOrder = async (req, res) => {
 
     // res.json(response.data)
     //respuesta de la data en json
-    res.redirect("http://localhost:3000/pay");
+    res.redirect("https://pf-599l06aqv-nicovied0.vercel.app/pay");
     //respuesta con redirect
   } catch (error) {
     console.log(error.message);

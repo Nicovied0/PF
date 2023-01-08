@@ -1,7 +1,7 @@
+import { BACK_CONECT } from "./const";
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
-import {BACK_CONECT} from "./const"
 
 export function loginUser(dataUser) {
   return async function () {
@@ -10,7 +10,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post(`${BACK_CONECT}/api/auth/login`, dataUser);
+      const Login = await axios.post(BACK_CONECT + `/api/auth/login`, dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -127,14 +127,13 @@ export function payWithPayPal(monto) {
       `${BACK_CONECT}/api/paypal/create-order`,
       monto
     );
-    console.log(monto,"soy monto login")
+    console.log(monto, "soy monto login");
     console.log(response.data.links[1].href);
     // const data = response;
     window.location.href = response.data.links[1].href;
     // console.log(data);
   };
 }
-
 
 // export function captureData() {
 //   return async function (req, res) {

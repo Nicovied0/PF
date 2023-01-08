@@ -17,7 +17,7 @@ import {
 } from "./types";
 import axios from "axios";
 import dotenv from "dotenv";
-import {BACK_CONECT} from "../../const"
+import { BACK_CONECT } from "../../const";
 dotenv.config();
 // const {NAME_CLOUDINARY} = process.env;
 
@@ -32,7 +32,7 @@ dotenv.config();
 
 export function postDog(payload) {
   return async function () {
-    const post = await axios.post(`${BACK_CONECT}/api/dogs`, payload);
+    const post = await axios.post(BACK_CONECT + `/api/dogs`, payload);
     return post;
   };
 }
@@ -40,7 +40,7 @@ export function postDog(payload) {
 export default function postMeli(title, unit_price) {
   return async function () {
     const post = await axios
-      .post(`${BACK_CONECT}/mercadopago`, title, unit_price)
+      .post(BACK_CONECT + `/mercadopago`, title, unit_price)
       .then((res) => (window.location.href = res.data.init_point));
     return post;
   };
@@ -72,7 +72,7 @@ export const clearCloudinaryResponse = () => {
 export const getUsers = () => {
   return async function (dispatch) {
     try {
-      let json = await axios(`${BACK_CONECT}/api/users`);
+      let json = await axios(BACK_CONECT + `/api/users`);
       return dispatch({
         type: GET_USERS,
         payload: json.data,
@@ -86,7 +86,7 @@ export const getUsers = () => {
 export const getDogs = () => {
   return async function (dispatch) {
     try {
-      let json = await axios(`${BACK_CONECT}/api/dogs`);
+      let json = await axios(BACK_CONECT + `/api/dogs`);
       return dispatch({
         type: GET_DOGS,
         payload: json.data,
@@ -99,7 +99,7 @@ export const getDogs = () => {
 export const getDogsDetails = (id) => {
   return async function (dispatch) {
     try {
-      let json = await axios(`${BACK_CONECT}/api/dogs/` + id);
+      let json = await axios(BACK_CONECT + `/api/dogs/` + id);
       return dispatch({
         type: GET_DOGS_DETAILS,
         payload: json.data,
@@ -142,10 +142,7 @@ export function filterDogsBySize(payload) {
 export function postVolunteer(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post(
-      `${BACK_CONECT}/api/volunteers`,
-      data
-    );
+    const json = await axios.post(BACK_CONECT + `/api/volunteers`, data);
     console.log(json.data);
     return dispatch({
       type: POST_VOLUNTEER,
@@ -156,10 +153,7 @@ export function postVolunteer(data) {
 export function postAdoption(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post(
-      `${BACK_CONECT}/api/adoptions`,
-      data
-    );
+    const json = await axios.post(BACK_CONECT + `/api/adoptions`, data);
     console.log(json.data);
     return dispatch({
       type: POST_ADOPTION,
@@ -170,10 +164,7 @@ export function postAdoption(data) {
 export function postContribution(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post(
-      `${BACK_CONECT}/api/contributions`,
-      data
-    );
+    const json = await axios.post(BACK_CONECT + `/api/contributions`, data);
     console.log(json.data);
     return dispatch({
       type: POST_CONTRIBUTION,
@@ -185,7 +176,7 @@ export function postContribution(data) {
 export const getPress = () => {
   return async function (dispatch) {
     try {
-      let json = await axios(`${BACK_CONECT}/api/press`);
+      let json = await axios(BACK_CONECT + `/api/press`);
       return dispatch({
         type: GET_PRESS,
         payload: json.data,
@@ -198,20 +189,14 @@ export const getPress = () => {
 
 export function registerFunction(payload) {
   return async function () {
-    const post = await axios.post(
-      `${BACK_CONECT}/api/auth/register`,
-      payload
-    );
+    const post = await axios.post(BACK_CONECT + `/api/auth/register`, payload);
     return post;
   };
 }
 
 export function loginFunctionA0(payload) {
   return async function () {
-    const post = await axios.post(
-      `${BACK_CONECT}/api/auth/login`,
-      payload
-    );
+    const post = await axios.post(BACK_CONECT + `/api/auth/login`, payload);
     return post;
   };
 }
@@ -219,7 +204,7 @@ export function loginFunctionA0(payload) {
 export const getUsersEmail = () => {
   return async function (dispatch) {
     try {
-      let json = await axios(`${BACK_CONECT}/api/users`);
+      let json = await axios(BACK_CONECT + `/api/users`);
       let json2 = json.data.map((e) => e.email);
       return dispatch({
         type: GET_USERS_EMAIL,

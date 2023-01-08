@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {BACK_CONECT} from "./const"
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import dotenv from "dotenv";
@@ -9,7 +10,6 @@ import { Provider } from 'react-redux';
 import store from './redux/store/store'
 import { Auth0Provider } from "@auth0/auth0-react";
 dotenv.config();
-import {BACK_CONECT} from "./const"
 
 //para que funcione  hacer npm intall dotenv
 

@@ -1,10 +1,11 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
+import { BACK_CONECT } from "./const";
 import pushCloudinary from "./hooks/pushCloudinary";
 const dotenv = require("dotenv");
 dotenv.config();
 
-const apiUrl = `${process.env.BACK_URL}`;
+const apiUrl = `${BACK_CONECT}`;
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {

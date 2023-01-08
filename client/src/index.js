@@ -13,7 +13,7 @@ dotenv.config();
 
 //para que funcione  hacer npm intall dotenv
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "https://campito-api-production.up.railway.app";
+axios.defaults.baseURL = process.env.REACT_APP_API || `https://campito-api-production.up.railway.app`;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +22,7 @@ root.render(
     <Auth0Provider
         domain="dev-i2ktot5tu17k7x45.us.auth0.com"
         clientId="a5EV2B0kWxPioUIHkQUJIkc9yTnZPnuX"
-        redirectUri="https://el-campito-refugio.vercel.app"
+        redirectUri={window.location.origin}
       >
         <App />
       </Auth0Provider>

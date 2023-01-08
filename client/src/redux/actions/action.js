@@ -40,7 +40,7 @@ export function postDog(payload) {
 export default function postMeli(title, unit_price) {
   return async function () {
     const post = await axios
-      .post("https://pf-production-bd8a.up.railway.app" + `/mercadopago`, title, unit_price)
+      .post(`https://pf-production-bd8a.up.railway.app/mercadopago`, title, unit_price)
       .then((res) => (window.location.href = res.data.init_point));
     return post;
   };
@@ -72,7 +72,7 @@ export const clearCloudinaryResponse = () => {
 export const getUsers = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://pf-production-bd8a.up.railway.app" + `/api/users`);
+      let json = await axios(`https://pf-production-bd8a.up.railway.app/api/users`);
       return dispatch({
         type: GET_USERS,
         payload: json.data,
@@ -86,7 +86,7 @@ export const getUsers = () => {
 export const getDogs = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://pf-production-bd8a.up.railway.app" + `/api/dogs`);
+      let json = await axios(`https://pf-production-bd8a.up.railway.app/api/dogs`);
       return dispatch({
         type: GET_DOGS,
         payload: json.data,
@@ -99,7 +99,7 @@ export const getDogs = () => {
 export const getDogsDetails = (id) => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://pf-production-bd8a.up.railway.app" + `/api/dogs/` + id);
+      let json = await axios(`https://pf-production-bd8a.up.railway.app/api/dogs/` + id);
       return dispatch({
         type: GET_DOGS_DETAILS,
         payload: json.data,
@@ -142,7 +142,7 @@ export function filterDogsBySize(payload) {
 export function postVolunteer(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post("https://pf-production-bd8a.up.railway.app" + `/api/volunteers`, data);
+    const json = await axios.post(`https://pf-production-bd8a.up.railway.app/api/volunteers`, data);
     console.log(json.data);
     return dispatch({
       type: POST_VOLUNTEER,
@@ -153,7 +153,7 @@ export function postVolunteer(data) {
 export function postAdoption(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post("https://pf-production-bd8a.up.railway.app" + `/api/adoptions`, data);
+    const json = await axios.post(`https://pf-production-bd8a.up.railway.app/api/adoptions`, data);
     console.log(json.data);
     return dispatch({
       type: POST_ADOPTION,
@@ -164,7 +164,7 @@ export function postAdoption(data) {
 export function postContribution(data) {
   return async (dispatch) => {
     console.log(data);
-    const json = await axios.post("https://pf-production-bd8a.up.railway.app" + `/api/contributions`, data);
+    const json = await axios.post(`https://pf-production-bd8a.up.railway.app/api/contributions`, data);
     console.log(json.data);
     return dispatch({
       type: POST_CONTRIBUTION,
@@ -176,7 +176,7 @@ export function postContribution(data) {
 export const getPress = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://pf-production-bd8a.up.railway.app" + `/api/press`);
+      let json = await axios(`https://pf-production-bd8a.up.railway.app/api/press`);
       return dispatch({
         type: GET_PRESS,
         payload: json.data,

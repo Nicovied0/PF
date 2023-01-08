@@ -1,9 +1,7 @@
-import { BACK_CONECT } from "./const";
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
 
-console.log(BACK_CONECT)
 export function loginUser(dataUser) {
   return async function () {
     if (dataUser.length || !dataUser) {
@@ -11,7 +9,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("https://campito-api-production.up.railway.app" + `/api/auth/login`, dataUser);
+      const Login = await axios.post(`https://campito-api-production.up.railway.app/api/auth/login`, dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -31,7 +29,7 @@ export function updateRole() {
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
     let localRoles = localInfoRole.data?.info.roles;
-    const user = await axios.get( "https://campito-api-production.up.railway.app" + `/api/users/${id}`);
+    const user = await axios.get( `https://campito-api-production.up.railway.app/api/users/${id}`);
 
     dataRoles = user.data.roles;
     if (dataRoles.toString() !== localRoles.toString()) {
@@ -50,9 +48,9 @@ export function updateRole() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post("https://campito-api-production.up.railway.app" +`/api/auth/login`, dataUser);
-      console.log(Login, "Soy Login de funcition login");
+      const Login = await axios.post(`https://campito-api-production.up.railway.app/api/auth/login`, dataUser);
       localStorage.setItem("user", JSON.stringify(Login));
+      console.log(Login, "Soy Login de funcition login");
     } catch {
       alert("Error En iniciar sesión con Google,Pruba cambiando tu contraseña");
     }
@@ -62,7 +60,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get("https://campito-api-production.up.railway.app" + `/api/users/`);
+    const dataUsers = await axios.get(`https://campito-api-production.up.railway.app/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -73,7 +71,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        "https://campito-api-production.up.railway.app" +`/api/auth/register`,
+        `https://campito-api-production.up.railway.app/api/auth/register`,
         dataUser
       );
       registerData();
@@ -92,7 +90,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get("https://campito-api-production.up.railway.app" +`/api/users/`);
+    const dataUsers = await axios.get(`https://campito-api-production.up.railway.app/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -125,7 +123,7 @@ export function emailAvailable(email) {
 export function payWithPayPal(monto) {
   return async function () {
     const response = await axios.post(
-      "https://campito-api-production.up.railway.app"+`/api/paypal/create-order`,
+      `https://campito-api-production.up.railway.app/api/paypal/create-order`,
       monto
     );
     console.log(monto, "soy monto login");

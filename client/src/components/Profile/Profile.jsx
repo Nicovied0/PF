@@ -28,7 +28,7 @@ const Profile = () => {
   // console.log(items, "soy items");
   function logoutSession() {
     localStorage.removeItem("user");
-    // window.location.reload();
+    window.location.reload();
   }
 
   if (isLoading) {

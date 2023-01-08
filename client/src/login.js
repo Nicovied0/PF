@@ -9,7 +9,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post(`https://campito-api-production.up.railway.app/api/auth/login`, dataUser);
+      const Login = await axios.post(`https://apipf-production-001a.up.railway.app/api/auth/login`, dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -48,7 +48,7 @@ export function updateRole() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post(`https://campito-api-production.up.railway.app/api/auth/login`, dataUser);
+      const Login = await axios.post(`https://apipf-production-001a.up.railway.app/api/auth/login`, dataUser);
       localStorage.setItem("user", JSON.stringify(Login));
       console.log(Login, "Soy Login de funcition login");
     } catch {
@@ -60,7 +60,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get(`https://campito-api-production.up.railway.app/api/users/`);
+    const dataUsers = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });

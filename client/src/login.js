@@ -1,6 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
+import {BACK_CONECT} from "./const"
 
 export function loginUser(dataUser) {
   return async function () {
@@ -9,7 +10,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("/api/auth/login", dataUser);
+      const Login = await axios.post(`${BACK_CONECT}/api/auth/login`, dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -29,7 +30,7 @@ export function updateRole() {
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
     let localRoles = localInfoRole.data?.info.roles;
-    const user = await axios.get(`${process.env.BACK_URL}/api/users/${id}`);
+    const user = await axios.get(`${BACK_CONECT}/api/users/${id}`);
 
     dataRoles = user.data.roles;
     if (dataRoles.toString() !== localRoles.toString()) {
@@ -48,7 +49,7 @@ export function updateRole() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post("/api/auth/login", dataUser);
+      const Login = await axios.post(`${BACK_CONECT}/api/auth/login`, dataUser);
       console.log(Login, "Soy Login de funcition login");
       localStorage.setItem("user", JSON.stringify(Login));
     } catch {
@@ -60,7 +61,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get(`${process.env.BACK_URL}/api/users/`);
+    const dataUsers = await axios.get(`${BACK_CONECT}/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -71,7 +72,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        `${process.env.BACK_URL}/api/auth/register`,
+        `${BACK_CONECT}/api/auth/register`,
         dataUser
       );
       registerData();
@@ -90,7 +91,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get(`${process.env.BACK_URL}/api/users/`);
+    const dataUsers = await axios.get(`${BACK_CONECT}/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -123,7 +124,7 @@ export function emailAvailable(email) {
 export function payWithPayPal(monto) {
   return async function () {
     const response = await axios.post(
-      `${process.env.BACK_URL}/api/paypal/create-order`,
+      `${BACK_CONECT}/api/paypal/create-order`,
       monto
     );
     console.log(monto,"soy monto login")

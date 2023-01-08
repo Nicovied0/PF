@@ -9,10 +9,11 @@ import { Provider } from 'react-redux';
 import store from './redux/store/store'
 import { Auth0Provider } from "@auth0/auth0-react";
 dotenv.config();
+import {BACK_CONECT} from "./const"
 
 //para que funcione  hacer npm intall dotenv
 
-axios.defaults.baseURL = process.env.REACT_APP_API || `${process.env.BACK_URL}`;
+axios.defaults.baseURL = process.env.REACT_APP_API || `${BACK_CONECT}`;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

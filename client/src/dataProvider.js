@@ -2,7 +2,7 @@ import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 import pushCloudinary from "./hooks/pushCloudinary";
 
-const apiUrl = "https://campito-api-production.up.railway.app";
+const apiUrl = "https://apipf-production-001a.up.railway.app/";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {

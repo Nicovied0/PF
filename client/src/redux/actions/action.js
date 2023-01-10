@@ -32,14 +32,14 @@ dotenv.config();
 
 export function postDog(payload) {
   return async function () {
-    const post = await axios.post('https://campito-api-production.up.railway.app/api/dogs', payload)
+    const post = await axios.post('https://apipf-production-001a.up.railway.app/api/dogs', payload)
     return post
   }
 }
 
 export default function postMeli(title, unit_price) {
   return async function () {
-    const post = await axios.post('https://campito-api-production.up.railway.app/mercadopago', title, unit_price).then((res)=>window.location.href = res.data.init_point)
+    const post = await axios.post('https://apipf-production-001a.up.railway.app/mercadopago', title, unit_price).then((res)=>window.location.href = res.data.init_point)
     return post
   }
 }
@@ -67,7 +67,7 @@ export const clearCloudinaryResponse = () => {
 export const getUsers = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://campito-api-production.up.railway.app/api/users")
+      let json = await axios("https://apipf-production-001a.up.railway.app/api/users")
       return dispatch({
         type: GET_USERS,
         payload: json.data
@@ -81,7 +81,7 @@ export const getUsers = () => {
 export const getDogs = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://campito-api-production.up.railway.app/api/dogs")
+      let json = await axios("https://apipf-production-001a.up.railway.app/api/dogs")
       return dispatch({
         type: GET_DOGS,
         payload: json.data
@@ -94,7 +94,7 @@ export const getDogs = () => {
 export const getDogsDetails = (id) => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://campito-api-production.up.railway.app/api/dogs/" + id)
+      let json = await axios("https://apipf-production-001a.up.railway.app/api/dogs/" + id)
       return dispatch({
         type: GET_DOGS_DETAILS,
         payload: json.data
@@ -137,7 +137,7 @@ export function filterDogsBySize(payload) {
 export function postVolunteer (data) {
   return async (dispatch) => {
     console.log(data); 
-    const json = await axios.post(`https://campito-api-production.up.railway.app/api/volunteers`, data)
+    const json = await axios.post(`https://apipf-production-001a.up.railway.app/api/volunteers`, data)
     console.log(json.data);
     return dispatch({
       type: POST_VOLUNTEER,
@@ -148,7 +148,7 @@ export function postVolunteer (data) {
 export function postAdoption (data) {
   return async (dispatch) => {
     console.log(data); 
-    const json = await axios.post(`https://campito-api-production.up.railway.app/api/adoptions`, data)
+    const json = await axios.post(`https://apipf-production-001a.up.railway.app/api/adoptions`, data)
     console.log(json.data);
     return dispatch({
       type: POST_ADOPTION,
@@ -159,7 +159,7 @@ export function postAdoption (data) {
 export function postContribution (data) {
   return async (dispatch) => {
     console.log(data); 
-    const json = await axios.post(`https://campito-api-production.up.railway.app/api/contributions`, data)
+    const json = await axios.post(`https://apipf-production-001a.up.railway.app/api/contributions`, data)
     console.log(json.data);
     return dispatch({
       type: POST_CONTRIBUTION,
@@ -171,7 +171,7 @@ export function postContribution (data) {
 export const getPress = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://campito-api-production.up.railway.app/api/press")
+      let json = await axios("https://apipf-production-001a.up.railway.app/api/press")
       return dispatch({
         type: GET_PRESS,
         payload: json.data
@@ -184,14 +184,14 @@ export const getPress = () => {
 
 export function registerFunction(payload) {
   return async function () {
-    const post = await axios.post("https://campito-api-production.up.railway.app/api/auth/register", payload);
+    const post = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/register", payload);
     return post;
   };
 }
 
 export function loginFunctionA0(payload) {
   return async function () {
-    const post = await axios.post("https://campito-api-production.up.railway.app/api/auth/login", payload);
+    const post = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/login", payload);
     return post;
   };
 }
@@ -201,7 +201,7 @@ export function loginFunctionA0(payload) {
 export const getUsersEmail = () => {
   return async function (dispatch) {
     try {
-      let json = await axios("https://campito-api-production.up.railway.app/api/users")
+      let json = await axios("https://apipf-production-001a.up.railway.app/api/users")
       let json2 = json.data.map(e => e.email)
       return dispatch({
         type: GET_USERS_EMAIL,
@@ -216,7 +216,7 @@ export function dataProfile(id) {
   return async function (dispatch) {
     try {
       const userEmail = await axios.get(
-        `https://campito-api-production.up.railway.app/api/users/${id}`
+        `https://apipf-production-001a.up.railway.app/api/users/${id}`
       );
       return dispatch({
         type: "GET_USERS_PROFILE",
@@ -232,7 +232,7 @@ export function dataProfile(id) {
 export const postContacto = (data) => {
   return async function (dispatch) {
     try {
-      await axios.post("https://campito-api-production.up.railway.app/api/contacto", data);
+      await axios.post("https://apipf-production-001a.up.railway.app/api/contacto", data);
       return dispatch({
         type: POST_CONTACTO,
       })

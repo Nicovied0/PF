@@ -7,7 +7,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("https://campito-api-production.up.railway.app/api/auth/login", dataUser);
+      const Login = await axios.post("/api/auth/login", dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -27,7 +27,7 @@ export function updateProfile() {
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
     let localRoles = localInfoRole.data?.info;
-    const user = await axios.get(`https://campito-api-production.up.railway.app/api/users/${id}`);
+    const user = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/${id}`);
 
     dataRoles = user.data;
 
@@ -50,7 +50,7 @@ export function updateProfile() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post("https://campito-api-production.up.railway.app/api/auth/login", dataUser);
+      const Login = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/login", dataUser);
       console.log(Login, "Soy Login de funcition login");
       localStorage.setItem("user", JSON.stringify(Login));
     } catch {
@@ -62,7 +62,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get("https://campito-api-production.up.railway.app/api/users/");
+    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -73,7 +73,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        "https://campito-api-production.up.railway.app/api/auth/register",
+        "http://localhost:3001/api/auth/register",
         dataUser
       );
       registerData();
@@ -92,7 +92,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get("https://campito-api-production.up.railway.app/api/users/");
+    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -125,7 +125,7 @@ export function emailAvailable(email) {
 export function payWithPayPal(monto, names) {
   return async function () {
     const response = await axios.post(
-      "https://campito-api-production.up.railway.app/api/paypal/create-order",
+      "https://apipf-production-001a.up.railway.app/api/paypal/create-order",
       { monto, names }
     );
     console.log(monto, "soy monto login");
@@ -143,7 +143,7 @@ export function editProfile(emailData, id) {
     // const id = req.params
     // const data = req.body
     const edit = await axios.put(
-      `https://campito-api-production.up.railway.app/api/users/${id}`,
+      `https://apipf-production-001a.up.railway.app/api/users/${id}`,
       emailData
     );
 
@@ -166,7 +166,7 @@ export function editProfile(emailData, id) {
 
 export function changePassword(emailData) {
   return async function (req, res) {
-    const dataUsers = await axios.get("https://campito-api-production.up.railway.app/api/users/");
+    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
     let data = dataUsers.data.map((e) => {
       let objEmail = e.email;
       let objId = e._id;
@@ -181,13 +181,13 @@ export function changePassword(emailData) {
 
     if (edit) {
       const recoveryEmail = await axios.post(
-        "https://campito-api-production.up.railway.app/api/password/",
+        "https://apipf-production-001a.up.railway.app/api/password/",
         { email, id }
       );
       console.log(recoveryEmail);
     }
     alert("Se envio un correo para recuperar tu cuenta.");
-    window.location = "http://localhost:3000/";
+    window.location = "https://el-campito-refugio.vercel.app/";
   };
 }
 
@@ -202,7 +202,7 @@ export function updatePassword(obj) {
       console.log(pass, "soy pass");
       console.log(id, "soy id");
       const recoveryEmail = await axios.put(
-        `https://campito-api-production.up.railway.app/api/users/password/${id}`,
+        `https://apipf-production-001a.up.railway.app/api/users/password/${id}`,
         { pass }
       );
       console.log(recoveryEmail, "soy id");
@@ -216,7 +216,7 @@ export function updatePassword(obj) {
 
 export function dataProfile(id) {
   return async function () {
-    const userEmail = await axios.get(`https://campito-api-production.up.railway.app/api/users/${id}`);
+    const userEmail = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/${id}`);
     let dataProfile = userEmail.data.email;
     console.log(dataProfile);
     return dataProfile;

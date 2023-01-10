@@ -7,7 +7,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("/api/auth/login", dataUser);
+      const Login = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/login", dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;

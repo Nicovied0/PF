@@ -270,7 +270,7 @@ const QuieroColaborar = () => {
                 alt="Logo de Cafecito"
               />
             </div>
-            <button className={styles.buttonCF} onClick={payWithPayPal()}>
+            <button className={styles.buttonCF}>
               <a href="https://cafecito.app/refugioelcampito" target="_blank" rel="noreferrer" className={styles.linkCafecito}>Donar Cafecito</a>
             </button>
           </article>

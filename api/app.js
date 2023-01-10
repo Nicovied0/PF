@@ -3,9 +3,8 @@ const cors = require("cors");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const app = express();
 const dotenv = require("dotenv");
-
+const app = express();
 
 //--------------------------------
 // const {dogModel} = require("./models/index");
@@ -28,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
 // app.use(morgan('dev'));
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `${process.env.FRONT_URL}`); // or `http://localhost:${FRONT}`// update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*"); // or `http://localhost:${FRONT}`// update to match the domain you will make the request from
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",

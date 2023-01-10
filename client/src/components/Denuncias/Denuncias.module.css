@@ -14,9 +14,11 @@
   -webkit-box-direction: normal;
  
   flex-direction: row;
+  margin:5px;
 }
 .denunciasSection {
   width: 70%;
+  margin: 4rem 0;
 }
 .denunciaImg{
   max-height: 800px;
@@ -28,10 +30,7 @@
       align-items: center;
 text-align: center;
 }
-section {
-  width: 100%;
-  margin: 4rem 0;
-}
+
 .h2Denuncias{
   color: #444445;
   margin-block-start: 0.83em;
@@ -61,6 +60,41 @@ body {
   color: #444445;
     font-weight: 300;
 }
-ul li{
-  font-size: 1em;
+.listasDenuncia{
+  font-family: 'Seravek';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    letter-spacing: 0.06em;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+.imgDenuncia{
+  display:none
+}
+.denunciasSection{
+  width: 100%;
+}
+.parent{
+  margin:15px;
+ 
+}
+.denunciasSection{
+  margin:0px
+}
+}
+@media (max-width: 360px) {
+  .parent{
+    margin:0;
+    padding: 0px;
+  }
+  .imgDenuncia{
+    display:none
+  }
+  .denunciasSection{
+    width: 100%;
+  }
+  
 }

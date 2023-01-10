@@ -1,39 +1,67 @@
-
-.container{
+.container {
   padding: 50px;
 }
-.card{
-  margin:10px;
-  padding:10px;
+
+.card {
+  margin: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  grid-gap: 30px;
+  justify-items: center;
+
 
 }
-.h2PrensaAmigos{
+
+.h2PrensaAmigos {
   color: #4FA7C1;
   font-family: 'Trashhand';
-    font-size: 2.8em;
+  font-size: 2.8em;
 
 }
-.iframePrensaAmigos{
+
+.iframePrensaAmigos {
   width: 400px;
   height: 480px;
-  margin: 10px;
+
+
 }
-@media (max-width: 800px) {
-  
-  .h2PrensaAmigos{
+
+.amigosInfo {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+
+  .h2PrensaAmigos {
     text-align: center;
   }
-  .card{
+
+  .card {
     grid-template-columns: 50% 50%;
     align-items: center;
+    grid-gap: 0px;
   }
-  .iframePrensaAmigos{
+
+  .iframePrensaAmigos {
     width: 200px;
-  height: 240px;
-  margin:5px
+    height: 240px;
+    margin: 15px
+  }
+}
+
+@media (max-width: 360px) {
+  .card {
+    grid-template-columns: 100%;
+    align-items: center;
+  }
+
+  .amigosInfo {
+    margin-top: 40px
   }
 }

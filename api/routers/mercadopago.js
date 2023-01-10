@@ -1,7 +1,6 @@
 const router = require("express").Router();
+const { payment } = require("mercadopago");
 const mercadopago = require("mercadopago");
-const dotenv = require("dotenv");
-dotenv.config();
 
 router.post("/", async (req, res) => {
   const { title, unit_price } = req.body;
@@ -16,12 +15,11 @@ router.post("/", async (req, res) => {
       },
     ],
     back_urls: {
-      success: `${process.env.BACK_URL}/colaborar`, //falta hacer esto
+      success: "http://localhost:3000/colaborar", //falta hacer esto
       failure: "",
       pending: "",
     },
     auto_return: "approved",
-    /* collector_id: 1265040282,  */ //este id se obtiene en "https://api.mercadopago.com/users/me?access_token=ACCESS_TOKEN"
     payment_methods: {
       excluded_payment_types: [
         {
@@ -36,8 +34,6 @@ router.post("/", async (req, res) => {
     const response = await mercadopago.preferences.create(preference);
     const paymentUrl = response.body;
     res.status(200).send(paymentUrl);
-    /* const paymentUrl = response.body.init_point; 
-      res.redirect(paymentUrl);  */
   } catch (error) {
     console.log(error);
     res.send(error);

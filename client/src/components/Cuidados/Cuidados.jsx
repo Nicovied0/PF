@@ -10,13 +10,14 @@ import imgVoluntario6 from "../../assets/img/escolar/img-voluntarios6.jpg"
 import imgVoluntario7 from "../../assets/img/escolar/img-voluntarios7.jpg"
 import imgVoluntario8 from "../../assets/img/escolar/img-voluntarios8.jpg"
 import imgVoluntario9 from "../../assets/img/escolar/img-voluntarios9.jpg"
+
 const Cuidados = () => {
   return (
     <div className={styles.container}>
     <BarraDeNavegacion/>
       <main className={styles.parentColumn} id="main">
         <div className={styles.parent}>
-            <section>
+            <section className={styles.sectionCuidados}>
                 <h2 className={styles.h2cuidados}>CUIDADOS DENTRO DEL REFUGIO</h2>
                 <p className={styles.pCuidados}>En todos los años que El Campito lleva adelante tareas de recuperaci&oacute;n, son incontables los casos con
                     los que trabajamos mano a pata.
@@ -59,8 +60,8 @@ const Cuidados = () => {
                 <img src={imgVoluntario9} alt=""  className={styles.imgCuidados}/>
             </div>
         </section>
-        <div class="parent margin-top">
-            <section>
+        <div>
+         <section className={styles.sectionCuidados}>
                 <h2 className={styles.h2cuidados}>LOS DISCAS</h2>
                 <p className={styles.pCuidados}>Son perros paral&iacute;ticos, ciegos, o con tres patas.
                     Somos el &uacute;nico refugio del mundo que cuida 130 perros que para trasladarse necesitan carros, como

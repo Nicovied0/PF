@@ -11,7 +11,7 @@ dotenv.config();
 // const pushDBpress = require("./utils/pushDBpress");
 
 
-const BACK_URL = process.env.BACK_URL || 3001;
+const PORT = process.env.PORT || 3001;
 
 
 
@@ -22,9 +22,9 @@ dbConnect().then((res) => {
   // pushDBvolunteers();
   // pushDBpress();
 
-  app.listen(`${BACK_URL}`, () => {
+  app.listen(process.env.PORT, () => {
     print.succe("Successfully connected");
-    print.listen(`${BACK_URL}`);
+    print.listen(`http://localhost:${PORT}`);
   });
 },
 

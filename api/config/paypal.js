@@ -8,7 +8,7 @@ const PAYPAL_API = "https://api-m.sandbox.paypal.com" // url sandbox or live for
 
 // Server
 const PORT =  3001;
-const HOST = `https://pf-production-bd8a.up.railway.app`;
+const HOST = "http://localhost:" + PORT;
 
 module.exports = {
   PAYPAL_API,

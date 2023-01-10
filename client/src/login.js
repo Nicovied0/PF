@@ -1,6 +1,4 @@
 import axios from "axios";
-import dotenv from "dotenv";
-dotenv.config();
 
 export function loginUser(dataUser) {
   return async function () {
@@ -9,7 +7,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post(`https://apipf-production-001a.up.railway.app/api/auth/login`, dataUser);
+      const Login = await axios.post("/api/auth/login", dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -22,35 +20,39 @@ export function loginUser(dataUser) {
   };
 }
 
-export function updateRole() {
+export function updateProfile() {
   let dataRoles = "";
   return async function () {
     const localInfo = JSON.parse(localStorage.getItem("user"));
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
-    let localRoles = localInfoRole.data?.info.roles;
-    const user = await axios.get( `https://campito-api-production.up.railway.app/api/users/${id}`);
+    let localRoles = localInfoRole.data?.info;
+    const user = await axios.get(`http://localhost:3001/api/users/${id}`);
 
-    dataRoles = user.data.roles;
-    if (dataRoles.toString() !== localRoles.toString()) {
-      localStorage.removeItem("user");
-      window.location.reload();
-      console.log("Hay que actualizar");
-      alert("Tu perfil se encuentra desactualizado, reinicia tu sesion");
+    dataRoles = user.data;
+
+    if (
+      localRoles.image === dataRoles.image &&
+      localRoles.phone === dataRoles.phone &&
+      localRoles.birthday === dataRoles.birthday &&
+      dataRoles.roles.toString() === localRoles.roles.toString()
+    ) {
+      alert("Tu perfil esta actualizado");
     } else {
       console.log("Todo bien");
-      alert("Tu perfil esta actualizado");
+      localStorage.removeItem("user");
+      window.location.reload();
+      alert("Tu perfil se encuentra desactualizado, reinicia tu sesion");
     }
-    return dataRoles;
   };
 }
 
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post(`https://apipf-production-001a.up.railway.app/api/auth/login`, dataUser);
-      localStorage.setItem("user", JSON.stringify(Login));
+      const Login = await axios.post("/api/auth/login", dataUser);
       console.log(Login, "Soy Login de funcition login");
+      localStorage.setItem("user", JSON.stringify(Login));
     } catch {
       alert("Error En iniciar sesión con Google,Pruba cambiando tu contraseña");
     }
@@ -60,7 +62,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/`);
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -71,7 +73,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        `https://campito-api-production.up.railway.app/api/auth/register`,
+        "http://localhost:3001/api/auth/register",
         dataUser
       );
       registerData();
@@ -90,7 +92,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get(`https://campito-api-production.up.railway.app/api/users/`);
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -100,10 +102,10 @@ export function emailAvailable(email) {
     let icludes = data.includes(email);
     let filtro = data.find((e) => e !== "");
     let userType = null;
-    if (filtro && !!localInfoRole === false) {
-      console.log("No se ingreso email");
-      return (userType = 1);
-    }
+    // if (filtro && !!localInfoRole === false) {
+    //   console.log("No se ingreso email");
+    //   return (userType = 1);
+    // }
     if (!!localInfoRole) {
       console.log("Estoy logueado");
       return (userType = 2);
@@ -120,33 +122,103 @@ export function emailAvailable(email) {
   };
 }
 
-export function payWithPayPal(monto) {
+export function payWithPayPal(monto, names) {
   return async function () {
     const response = await axios.post(
-      `https://campito-api-production.up.railway.app/api/paypal/create-order`,
-      monto
+      "http://localhost:3001/api/paypal/create-order",
+      { monto, names }
     );
     console.log(monto, "soy monto login");
     console.log(response.data.links[1].href);
-    // const data = response;
     window.location.href = response.data.links[1].href;
-    // console.log(data);
   };
 }
 
-// export function captureData() {
-//   return async function (req, res) {
-//     let { token } = await req.query;
-
-//     console.log(token);
-//   };
-// }
-
-export function changePassword() {
+export function editProfile(emailData, id) {
   return async function (req, res) {
     // traer el id y el usuario registrado de la bd con el email
     // luego comporbar que conicida el email con el ingresado anteriormente
     // modificar el valor de pass de db atravez de un put el valor ingresado
-    //
+
+    // const id = req.params
+    // const data = req.body
+    const edit = await axios.put(
+      `http://localhost:3001/api/users/${id}`,
+      emailData
+    );
+
+    console.log(edit, "soy data22");
+    console.log(id, "soy data e id");
+    alert("Cambios Guardados");
+    // const dataUsers = await axios.get("http://localhost:3001/api/users/");
+    // let data = dataUsers.data.map((e) => {
+    //   let objEmail = e.email;
+    //   let objId = e._id;
+    //   let info = { email: objEmail, id: objId };
+    //   return info;
+    // });
+    // console.log(data);
+    // let edit = data.find((e) => e.email === emailData)
+    // console.log(edit.email)
+    // console.log(edit.id)
+  };
+}
+
+export function changePassword(emailData) {
+  return async function (req, res) {
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
+    let data = dataUsers.data.map((e) => {
+      let objEmail = e.email;
+      let objId = e._id;
+      let info = { email: objEmail, id: objId };
+      return info;
+    });
+    let edit = data.find((e) => e.email === emailData);
+    if (!edit) return alert("No se encontro email");
+
+    let email = edit?.email;
+    let id = edit?.id;
+
+    if (edit) {
+      const recoveryEmail = await axios.post(
+        "http://localhost:3001/api/password/",
+        { email, id }
+      );
+      console.log(recoveryEmail);
+    }
+    alert("Se envio un correo para recuperar tu cuenta.");
+    window.location = "http://localhost:3000/";
+  };
+}
+
+export function updatePassword(obj) {
+  return async function (req, res) {
+    try {
+      // let {obj} = req.body
+      console.log(obj, "soy id de update");
+      console.log(obj.pass);
+      let pass = obj.pass;
+      let id = obj.id;
+      console.log(pass, "soy pass");
+      console.log(id, "soy id");
+      const recoveryEmail = await axios.put(
+        `http://localhost:3001/api/users/password/${id}`,
+        { pass }
+      );
+      console.log(recoveryEmail, "soy id");
+      alert("Se Cambio tu contaseña.");
+      window.location = "http://localhost:3000/";
+    } catch {
+      alert("Hubo un error al cambiar la contraseña");
+    }
+  };
+}
+
+export function dataProfile(id) {
+  return async function () {
+    const userEmail = await axios.get(`http://localhost:3001/api/users/${id}`);
+    let dataProfile = userEmail.data.email;
+    console.log(dataProfile);
+    return dataProfile;
   };
 }

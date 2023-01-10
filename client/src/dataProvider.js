@@ -1,11 +1,8 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
-import { BACK_CONECT } from "./const";
 import pushCloudinary from "./hooks/pushCloudinary";
-const dotenv = require("dotenv");
-dotenv.config();
 
-const apiUrl = "https://campito-api-production.up.railway.app";
+const apiUrl = "http://localhost:3001";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {

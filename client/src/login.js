@@ -73,7 +73,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        "http://localhost:3001/api/auth/register",
+        "https://campito-api-production.up.railway.app/api/auth/register",
         dataUser
       );
       registerData();

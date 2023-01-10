@@ -13,7 +13,7 @@ dotenv.config();
 
 //para que funcione  hacer npm intall dotenv
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "https://apipf-production-001a.up.railway.app";
+axios.defaults.baseURL = process.env.REACT_APP_API || "https://apipf-production-001a.up.railway.app/admin#";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

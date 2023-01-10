@@ -167,7 +167,6 @@
 }
 
 .buttonML,
-.buttonCF,
 .buttonPaypal {
   cursor: pointer;
   background-color: #4FA7C1;
@@ -181,6 +180,23 @@
   font-size: 1.8em;
   height: 100%;
   min-height: 150px;
+}
+
+.buttonCF {
+  cursor: pointer;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 15px;
+  border: 0px;
+  font-weight: bold;
+  color: #FFFFFF;
+  font-size: 1.8em;
+  height: 100%;
+  min-height: 150px;
+  align-items: center;
+  justify-content: center;
 }
 
 .btnPaypalMonto {

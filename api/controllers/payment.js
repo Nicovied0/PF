@@ -34,8 +34,8 @@ const createOrder = async (req, res) => {
         brand_name: "El campito Refugio",
         landing_page: "NO_PREFERENCE",
         user_action: "PAY_NOW",
-        return_url: "http://localhost:3001/api/paypal/capture-order",
-        cancel_url: "http://localhost:3001/api/paypal/cancel-order",
+        return_url: "https://apipf-production-001a.up.railway.app/api/paypal/capture-order",
+        cancel_url: "https://apipf-production-001a.up.railway.app/api/paypal/cancel-order",
       },
     };
 
@@ -119,7 +119,7 @@ const captureOrder = async (req, res) => {
 
     // res.json(response.data)
     //respuesta de la data en json
-    res.redirect("http://localhost:3000/pay");
+    res.redirect("https://el-campito-refugio.vercel.app/pay");
     //respuesta con redirect
   } catch (error) {
     console.log(error.message);
@@ -130,7 +130,7 @@ const captureOrder = async (req, res) => {
 
 const cancelPayment = (req, res) => {
   console.log("Se cancelo la operacion");
-  res.redirect("http://localhost:3000");
+  res.redirect("https://el-campito-refugio.vercel.app");
 };
 
 module.exports = {

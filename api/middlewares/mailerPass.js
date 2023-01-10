@@ -27,7 +27,7 @@ const mailer = async (req, res, next) => {
       html: `
       <h2>Solicitaste recuperar la contraseña con el email: ${email} en el Campito Regufio!</h2>
       <br>
-            <p>Ingresa <a href=${`http://localhost:3000/cambiarPassword/${id}`} style="color:blue">AQUI</a></p>
+            <p>Ingresa <a href=${`https://el-campito-refugio.vercel.app/cambiarPassword/${id}`} style="color:blue">AQUI</a></p>
               <br>
               <img src='https://doprod-statics.s3.amazonaws.com/pictures/logo/9343/large_fit_6709cfc0-d706-49ed-ba8e-d9682a4b8305.png' alt='Elcampito.jpeg' />
               <br>

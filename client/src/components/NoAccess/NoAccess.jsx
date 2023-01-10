@@ -3,7 +3,7 @@ import styles from "./NoAccess.module.css";
 
 const NoAccess = () => {
   function goHome() {
-    window.location = process.env.FRONT || "http://localhost:3000/";
+    window.location = process.env.FRONT || "https://el-campito-refugio.vercel.app/";
   }
   setTimeout(goHome, 3000);
 

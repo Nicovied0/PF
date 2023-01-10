@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:3000/colaborar", //falta hacer esto
+      success: "https://el-campito-refugio.vercel.app/colaborar", //falta hacer esto
       failure: "",
       pending: "",
     },

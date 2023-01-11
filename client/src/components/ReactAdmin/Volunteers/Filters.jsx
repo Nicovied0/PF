@@ -18,8 +18,8 @@ const Filters = () => {
           <FilterListItem label="Híbrido" value={{ modality: "hibrido" }} />
         </FilterList>
         <FilterList label="Carpooling" icon={<NoCrashIcon />}>
-          <FilterListItem label="Sí" value={{ carpooling: true }} />
-          <FilterListItem label="No" value={{ carpooling: false }} />
+          <FilterListItem label="Sí" value={{ carpooling: "si" }} />
+          <FilterListItem label="No" value={{ carpooling: "no" }} />
         </FilterList>
         <FilterList label="Condición" icon={<AssignmentIndIcon />}>
           <FilterListItem label="Pendiente" value={{ isPending: true }} />

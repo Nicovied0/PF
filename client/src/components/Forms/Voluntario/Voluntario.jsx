@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom"; // version 5.2.0
+import { useHistory } from 'react-router-dom'; // version 5.2.0
 import styles from "./Voluntario.module.css";
 // import Navbar from "../../NavBar/NavBar";
 import Footer from "../../Footer/Footer";
@@ -20,7 +20,7 @@ const Voluntario = (props) => {
   });
 
   // React.useEffect(()=>{
-  // },[user]);
+  // },[user]);  
 
   const {
     register,
@@ -48,7 +48,7 @@ const Voluntario = (props) => {
     alert("form create successfuly!");
     // e.target.reset();
     // window.location.reload();
-    history.push("./");
+    history.push ('./');
   };
 
   return (
@@ -138,16 +138,16 @@ const Voluntario = (props) => {
             <div className={styles.item}>
               <label className={styles.label}>Fecha de nacimiento</label>
               <input
-                value={
-                  !storage.birthday ||
-                  storage.birthday === "undefined" ||
-                  storage.birthday === "requerir" ||
-                  storage.birthday.includes("2022") ||
-                  storage.birthday.includes("2023") ||
-                  storage.birthday === ""
-                    ? undefined
-                    : storage.birthday
-                }
+                // value={
+                //   !storage.birthday ||
+                //   storage.birthday === "undefined" ||
+                //   storage.birthday === "requerir" ||
+                //   storage.birthday.includes("2022") ||
+                //   storage.birthday.includes("2023") ||
+                //   storage.birthday === ""
+                //     ? undefined
+                //     : storage.birthday
+                // }
                 type="date"
                 className={styles.inputDate}
                 min="1923-01-01"
@@ -166,7 +166,9 @@ const Voluntario = (props) => {
                 className={styles.input}
                 {...register("area", { required: true })}
               />
-              {errors.area?.type === "required" && <p>Localidad requerida</p>}
+              {errors.area?.type === "required" && (
+                <p>Localidad requerida</p>
+              )}
             </div>
 
             <div className={styles.item}>
@@ -309,7 +311,9 @@ const Voluntario = (props) => {
               <label className={styles.label}>
                 ¿Qué crees que podes sumar personalmente?
               </label>
-              <h4>- No es una pregunta sobre tu profesión, sino sobre vos -</h4>
+              <h4> 
+                - No es una pregunta sobre tu profesión, sino sobre vos - 
+              </h4>
               <input
                 type="text"
                 className={styles.input}

@@ -184,7 +184,7 @@ export const getPress = () => {
 
 export function registerFunction(payload) {
   return async function () {
-    const post = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/register", payload);
+    const post = await axios.post("/api/auth/register", payload);
     return post;
   };
 }

@@ -1,4 +1,5 @@
 import axios from "axios";
+let link = "https://pf-production-bd8a.up.railway.app"
 
 export function loginUser(dataUser) {
   return async function () {
@@ -7,7 +8,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/login", dataUser);
+      const Login = await axios.post(`${link}/api/auth/login`, dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -27,7 +28,7 @@ export function updateProfile() {
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
     let localRoles = localInfoRole.data?.info;
-    const user = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/${id}`);
+    const user = await axios.get(`${link}/api/users/${id}`);
 
     dataRoles = user.data;
 
@@ -50,7 +51,7 @@ export function updateProfile() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post("https://apipf-production-001a.up.railway.app/api/auth/login", dataUser);
+      const Login = await axios.post(`${link}/api/auth/login`, dataUser);
       console.log(Login, "Soy Login de funcition login");
       localStorage.setItem("user", JSON.stringify(Login));
     } catch {
@@ -62,7 +63,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
+    const dataUsers = await axios.get(`${link}/api/users`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -73,7 +74,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        "https://apipf-production-001a.up.railway.app/api/auth/register",
+        `${link}/api/auth/register`,
         dataUser
       );
       registerData();
@@ -92,7 +93,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
+    const dataUsers = await axios.get(`${link}/api/users/`);
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -125,7 +126,7 @@ export function emailAvailable(email) {
 export function payWithPayPal(monto, names) {
   return async function () {
     const response = await axios.post(
-      "https://apipf-production-001a.up.railway.app/api/paypal/create-order",
+      `${link}/api/paypal/create-order`,
       { monto, names }
     );
     console.log(monto, "soy monto login");
@@ -143,7 +144,7 @@ export function editProfile(emailData, id) {
     // const id = req.params
     // const data = req.body
     const edit = await axios.put(
-      `https://apipf-production-001a.up.railway.app/api/users/${id}`,
+      `${link}/api/users/${id}`,
       emailData
     );
 
@@ -166,7 +167,7 @@ export function editProfile(emailData, id) {
 
 export function changePassword(emailData) {
   return async function (req, res) {
-    const dataUsers = await axios.get("https://apipf-production-001a.up.railway.app/api/users/");
+    const dataUsers = await axios.get(`${link}/api/users/`);
     let data = dataUsers.data.map((e) => {
       let objEmail = e.email;
       let objId = e._id;
@@ -181,7 +182,7 @@ export function changePassword(emailData) {
 
     if (edit) {
       const recoveryEmail = await axios.post(
-        "https://apipf-production-001a.up.railway.app/api/password/",
+        `${link}/api/password/`,
         { email, id }
       );
       console.log(recoveryEmail);
@@ -202,7 +203,7 @@ export function updatePassword(obj) {
       console.log(pass, "soy pass");
       console.log(id, "soy id");
       const recoveryEmail = await axios.put(
-        `https://apipf-production-001a.up.railway.app/api/users/password/${id}`,
+        `${link}/api/users/password/${id}`,
         { pass }
       );
       console.log(recoveryEmail, "soy id");
@@ -216,7 +217,7 @@ export function updatePassword(obj) {
 
 export function dataProfile(id) {
   return async function () {
-    const userEmail = await axios.get(`https://apipf-production-001a.up.railway.app/api/users/${id}`);
+    const userEmail = await axios.get(`${link}/api/users/${id}`);
     let dataProfile = userEmail.data.email;
     console.log(dataProfile);
     return dataProfile;

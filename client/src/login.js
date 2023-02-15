@@ -1,5 +1,5 @@
 import axios from "axios";
-let link = "https://pf-production-bd8a.up.railway.app"
+import swal from "sweetalert";
 
 export function loginUser(dataUser) {
   return async function () {
@@ -8,7 +8,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post(`${link}/api/auth/login`, dataUser);
+      const Login = await axios.post("/api/auth/login", dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -28,7 +28,7 @@ export function updateProfile() {
     const localInfoRole = JSON.parse(localStorage.getItem("user"));
     let id = localInfo.data?.info._id;
     let localRoles = localInfoRole.data?.info;
-    const user = await axios.get(`${link}/api/users/${id}`);
+    const user = await axios.get(`http://localhost:3001/api/users/${id}`);
 
     dataRoles = user.data;
 
@@ -38,12 +38,19 @@ export function updateProfile() {
       localRoles.birthday === dataRoles.birthday &&
       dataRoles.roles.toString() === localRoles.roles.toString()
     ) {
-      alert("Tu perfil esta actualizado");
+      swal({
+        title: "Tu perfil esta actualizado!",
+        icon: "success",
+        button: "Cerrar",
+      });
     } else {
-      console.log("Todo bien");
       localStorage.removeItem("user");
+      swal({
+        title: "Tu perfil se encuentra desactualizado, reinicia tu sesion",
+        icon: "warning",
+        button: "Cerrar",
+      });
       window.location.reload();
-      alert("Tu perfil se encuentra desactualizado, reinicia tu sesion");
     }
   };
 }
@@ -51,7 +58,7 @@ export function updateProfile() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post(`${link}/api/auth/login`, dataUser);
+      const Login = await axios.post("/api/auth/login", dataUser);
       console.log(Login, "Soy Login de funcition login");
       localStorage.setItem("user", JSON.stringify(Login));
     } catch {
@@ -63,7 +70,7 @@ export function loginUserGoogle(dataUser) {
 export function registerUserGoogle(dataUser) {
   return async function () {
     // validacion que no este registrado//
-    const dataUsers = await axios.get(`${link}/api/users`);
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -74,7 +81,7 @@ export function registerUserGoogle(dataUser) {
 
     try {
       const registerData = await axios.post(
-        `${link}/api/auth/register`,
+        "http://localhost:3001/api/auth/register",
         dataUser
       );
       registerData();
@@ -93,7 +100,7 @@ export function registerUserGoogle(dataUser) {
 
 export function emailAvailable(email) {
   return async function () {
-    const dataUsers = await axios.get(`${link}/api/users/`);
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
     let data = dataUsers.data.map((e) => {
       return e.email;
     });
@@ -126,7 +133,7 @@ export function emailAvailable(email) {
 export function payWithPayPal(monto, names) {
   return async function () {
     const response = await axios.post(
-      `${link}/api/paypal/create-order`,
+      "http://localhost:3001/api/paypal/create-order",
       { monto, names }
     );
     console.log(monto, "soy monto login");
@@ -141,33 +148,21 @@ export function editProfile(emailData, id) {
     // luego comporbar que conicida el email con el ingresado anteriormente
     // modificar el valor de pass de db atravez de un put el valor ingresado
 
-    // const id = req.params
-    // const data = req.body
     const edit = await axios.put(
-      `${link}/api/users/${id}`,
+      `http://localhost:3001/api/users/${id}`,
       emailData
     );
-
-    console.log(edit, "soy data22");
-    console.log(id, "soy data e id");
-    alert("Cambios Guardados");
-    // const dataUsers = await axios.get("http://localhost:3001/api/users/");
-    // let data = dataUsers.data.map((e) => {
-    //   let objEmail = e.email;
-    //   let objId = e._id;
-    //   let info = { email: objEmail, id: objId };
-    //   return info;
-    // });
-    // console.log(data);
-    // let edit = data.find((e) => e.email === emailData)
-    // console.log(edit.email)
-    // console.log(edit.id)
+    swal({
+      title: "Cambios guardados!",
+      icon: "success",
+      button: "Cerrar",
+    });
   };
 }
 
 export function changePassword(emailData) {
   return async function (req, res) {
-    const dataUsers = await axios.get(`${link}/api/users/`);
+    const dataUsers = await axios.get("http://localhost:3001/api/users/");
     let data = dataUsers.data.map((e) => {
       let objEmail = e.email;
       let objId = e._id;
@@ -182,13 +177,13 @@ export function changePassword(emailData) {
 
     if (edit) {
       const recoveryEmail = await axios.post(
-        `${link}/api/password/`,
+        "http://localhost:3001/api/password/",
         { email, id }
       );
       console.log(recoveryEmail);
     }
     alert("Se envio un correo para recuperar tu cuenta.");
-    window.location = "https://el-campito-refugio.vercel.app/";
+    window.location = "http://localhost:3000/";
   };
 }
 
@@ -203,12 +198,12 @@ export function updatePassword(obj) {
       console.log(pass, "soy pass");
       console.log(id, "soy id");
       const recoveryEmail = await axios.put(
-        `${link}/api/users/password/${id}`,
+        `http://localhost:3001/api/users/password/${id}`,
         { pass }
       );
       console.log(recoveryEmail, "soy id");
       alert("Se Cambio tu contaseña.");
-      window.location = "https://el-campito-refugio.vercel.app/";
+      window.location = "http://localhost:3000/";
     } catch {
       alert("Hubo un error al cambiar la contraseña");
     }
@@ -217,9 +212,20 @@ export function updatePassword(obj) {
 
 export function dataProfile(id) {
   return async function () {
-    const userEmail = await axios.get(`${link}/api/users/${id}`);
+    const userEmail = await axios.get(`http://localhost:3001/api/users/${id}`);
     let dataProfile = userEmail.data.email;
     console.log(dataProfile);
     return dataProfile;
   };
 }
+
+// export function sendMail(emailData) {
+//   return async function (req, res) {
+//     const recoveryEmail = await axios.post(
+//       "http://localhost:3001/api/password/"
+//     );
+//     console.log(recoveryEmail);
+//   };
+//   alert("Se envio un correo para recuperar tu cuenta.");
+//   window.location = "http://localhost:3000/";
+// }

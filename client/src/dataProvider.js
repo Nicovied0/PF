@@ -2,7 +2,7 @@ import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 import pushCloudinary from "./hooks/pushCloudinary";
 
-const apiUrl = "https://pf-production-bd8a.up.railway.app";
+const apiUrl = "https://pf-back-five.vercel.app";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {

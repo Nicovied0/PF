@@ -13,7 +13,7 @@ dotenv.config();
 
 //para que funcione  hacer npm intall dotenv
 
-axios.defaults.baseURL = "https://pf-production-bd8a.up.railway.app";
+axios.defaults.baseURL = "https://pf-back-five.vercel.app";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

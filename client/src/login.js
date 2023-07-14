@@ -8,7 +8,7 @@ export function loginUser(dataUser) {
     }
     try {
       let data = {};
-      const Login = await axios.post("/api/auth/login", dataUser);
+      const Login = await axios.post("https://pf-back-five.vercel.app/api/auth/login", dataUser);
       // console.log(Login, "Soy Login");
       localStorage.setItem("user", JSON.stringify(Login));
       data = Login.data.info;
@@ -58,7 +58,7 @@ export function updateProfile() {
 export function loginUserGoogle(dataUser) {
   return async function () {
     try {
-      const Login = await axios.post("/api/auth/login", dataUser);
+      const Login = await axios.post("https://pf-back-five.vercel.app/api/auth/login", dataUser);
       console.log(Login, "Soy Login de funcition login");
       localStorage.setItem("user", JSON.stringify(Login));
     } catch {
@@ -219,13 +219,3 @@ export function dataProfile(id) {
   };
 }
 
-// export function sendMail(emailData) {
-//   return async function (req, res) {
-//     const recoveryEmail = await axios.post(
-//       "http://localhost:3001/api/password/"
-//     );
-//     console.log(recoveryEmail);
-//   };
-//   alert("Se envio un correo para recuperar tu cuenta.");
-//   window.location = "http://localhost:3000/";
-// }

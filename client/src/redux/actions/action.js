@@ -20,7 +20,7 @@ import {
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
-let link = "https://pf-production-bd8a.up.railway.app";
+let link = "http://localhost:3001";
 // const {NAME_CLOUDINARY} = process.env;
 
 /* export default function postMeli(title, unit_price) {
